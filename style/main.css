@@ -43,3 +43,9 @@ header {
 .gameScreen {
     padding: 5%;
 }
+
+#game_Log {
+    background-color: white;
+    height: 250px;
+    padding: 1%;
+}

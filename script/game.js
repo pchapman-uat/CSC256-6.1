@@ -34,11 +34,13 @@ function startGame(){
         health: document.getElementById("game_Health"),
     }
 
+    const LOG = document.getElementById("game_Log");
     PLAYER_STATS.displayName.innerHTML = player.name;
     PLAYER_STATS.score.innerHTML = "Score: "+player.score;
     PLAYER_STATS.health.innerHTML = "Health: "+player.health;
 
     let enemy = new Enemy("Enemy", 100);
     player.strongAttack(enemy);
+    LOG.innerHTML += "\n"+player.logging();
 
 }
