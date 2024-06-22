@@ -7,19 +7,19 @@ class Character {
     }
 
     takeDamage(damage){
-        this.recentLog = this.name + " took " + damage + " damage"
+        this.recentLog = " took " + damage + " damage"
         console.log(this.recentLog);
         this.health -= damage;
     }
 
     attackCharacter(character, damage){
-        this.recentLog = this.name + " attacked " + character.name + " for " + damage + " damage"
+        this.recentLog = " attacked " + character.name + " for " + damage + " damage"
         console.log(this.recentLog);
         character.takeDamage(damage);
     }
 
     logging(){
-        return this.recentLog
+        return `${this.name} ${this.recentLog}`
     }
 }
 class Player extends Character {
