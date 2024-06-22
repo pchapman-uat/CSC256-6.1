@@ -1,12 +1,25 @@
 class Character {
-    constructor(name, health){
+    recentLog = null;
+    constructor(name, health, baseAttack=10){
         this.name = name;
         this.health = health;
+        this.baseAttack = baseAttack;
     }
 
     takeDamage(damage){
-        console.log(this.name + " took " + damage + " damage");
+        this.recentLog = this.name + " took " + damage + " damage"
+        console.log(this.recentLog);
         this.health -= damage;
+    }
+
+    attackCharacter(character, damage){
+        this.recentLog = this.name + " attacked " + character.name + " for " + damage + " damage"
+        console.log(this.recentLog);
+        character.takeDamage(damage);
+    }
+
+    logging(){
+        return this.recentLog
     }
 }
 class Player extends Character {
@@ -14,10 +27,9 @@ class Player extends Character {
         super(name, 100);
         this.username = username;
         this.score = 0;
-        this.baseAttack = 10;
     }
     strongAttack(enemy){
-        enemy.takeDamage(this.baseAttack * 2);
+        this.attackCharacter(enemy, this.baseAttack * 2);
     }
 }
 
