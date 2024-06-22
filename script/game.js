@@ -1,5 +1,9 @@
-import Player from "./Character.js";
+import {Player, Enemy} from "./Character.js";
 document.addEventListener('DOMContentLoaded',main);
+
+/**
+ * @type {Player}
+ */
 var player;
 
 const debug = true;
@@ -33,6 +37,8 @@ function startGame(){
     PLAYER_STATS.displayName.innerHTML = player.name;
     PLAYER_STATS.score.innerHTML = "Score: "+player.score;
     PLAYER_STATS.health.innerHTML = "Health: "+player.health;
-    
+
+    let enemy = new Enemy("Enemy", 100);
+    player.strongAttack(enemy);
 
 }
