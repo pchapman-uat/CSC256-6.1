@@ -12,16 +12,21 @@
         <h1>Assignment 6.1: Computer Game Elements</h1>
         <h2>Preston Chapman | UAT</h2>
     </header>
-    <section class="account">
+    <section class="account gameSection">
         <form id="accountForm">
-            <label for="username">Username:</label>
-            <input id="username" type="text" placeholder="username" required>
-            <label for="displayName">Display Name:</label>
-            <input id="displayName" type="text" placeholder="Display Name">
+            <div>
+                <label for="username">Username:</label>
+                <input id="username" type="text" placeholder="username" required>
+            </div>
+            <div>
+                <label for="displayName">Display Name:</label>
+                <input id="displayName" type="text" placeholder="Display Name">
+            </div>
+           
             <button type="submit">Register</button>
         </form>
     </section>
-    <section class="game">
+    <section class="game gameSection">
         <div class="buttons">
             <div class="attacks">
                 <button id="weakAttack">Weak Attack</button>
@@ -30,7 +35,7 @@
             </div>
         </div>
     </section>
-    <section class="gameScreen">
+    <section class="gameScreen gameSection">
         <div>
             <h3>You:</h3>
             <p id="game_DisplayName"></p>
