@@ -143,9 +143,9 @@ function attack(type){
         default:
             break;
     }
-    LOG.innerHTML += player.logging()+"<br>";
+    LOG.innerHTML = player.logging()+"<br>"+LOG.innerHTML;
     currentEnemy.attackCharacter(player);
-    LOG.innerHTML += currentEnemy.logging()+"<br>";
+    LOG.innerHTML = currentEnemy.logging()+"<br>"+LOG.innerHTML;
     updateStats();
 }
 
