@@ -1,8 +1,12 @@
+// Imports
+// This file was clasified as a module in HTML to allow for imports from other files
 import {Player, Enemy} from "./Character.js";
+// On load start the main function
 document.addEventListener('DOMContentLoaded',main);
 
 
 // GLOBAL VARIABLES
+// JSDoc is used for intelisense
 /**
  * @type {Player}
  */
@@ -66,28 +70,43 @@ var ENEMY_STATS;
  * @type {HTMLElement}
  */
 var CLEAR_BTN;
+
+// If this is true it will bypass the registry
 const debug = true;
+// Main function
 function main(){
     console.log('Hello World');
+    // Set the register form
     const REGISTER_FORM = document.getElementById("accountForm")
+    // Add event listener for submiting account
     REGISTER_FORM.addEventListener("submit", register)
+    // If dubug is true create default character
     if(debug == true){
+        // Set the player
         player = new Player("Username", "Display Name");
+        // Set the score
         player.score = 1000;
+        // Set the game
         startGame();
     }
 }
+// Register the player
 function register(event){
+    // Prevent page from reloading
     event.preventDefault();
+    // Save the username and display name
     let username = document.getElementById("username").value;
     let displayName = document.getElementById("displayName").value;
+    // Create a player based on that information
     player = new Player(username, displayName);
     console.log(player);
+    // Start the game
     startGame();
 }
 
 function startGame(){
     console.log('Game Started');
+    // Update the palyer stats varriable
     PLAYER_STATS = {
         div: document.getElementById("gameScreen"),
         displayName: document.getElementById("game_DisplayName"),
@@ -96,8 +115,10 @@ function startGame(){
         item: document.getElementById("game_Item"),
     };
 
+    // Update the log varriable
     LOG = document.getElementById("game_Log");
 
+    // Update the actions varriable
     ACTIONS = {
         div: document.getElementById("gameActions"),
         attack: {
@@ -112,20 +133,27 @@ function startGame(){
         },
     };
 
+    // Update the enemy stats variable
     ENEMY_STATS = {
         displayName: document.getElementById("enemy_DisplayName"),
         points: document.getElementById("enemy_Points"),
         health: document.getElementById("enemy_Health"),
     };
 
+    // Update the clear button and add event listener
     CLEAR_BTN = document.getElementById("clearLog");
     CLEAR_BTN.addEventListener("click", clearLog);
 
+    // Show the actions and player stats
     ACTIONS.div.style.display = "block";
     PLAYER_STATS.div.style.display = "block";
+    // Create a new enemy
+    // TODO: Change to null to allow random name
     currentEnemy = new Enemy("Enemy", 100);
+    // Update the current stats
     updateStats();
 
+    // Add event listeners for all buttons
     ACTIONS.attack.weak.addEventListener("click", () => attack("weak"));
     ACTIONS.attack.normal.addEventListener("click", () => attack("normal"));
     ACTIONS.attack.strong.addEventListener("click", () => attack("strong"));
@@ -135,10 +163,12 @@ function startGame(){
     ACTIONS.heal.strong.addEventListener("click", () => heal("strong"));
 
 }
+// Update the stats screen
 function updateStats(){
     PLAYER_STATS.displayName.innerHTML = player.name;
     PLAYER_STATS.score.innerHTML = "Score: "+player.score;
     PLAYER_STATS.health.innerHTML = "Health: "+player.health;
+    // Handle if player does not have a weapon
     if(player.item == null) PLAYER_STATS.item.innerHTML = "Item: None";
     else PLAYER_STATS.item.innerHTML = "Item: "+player.item.name+ ` (${player.item.damage})`;
 
@@ -146,7 +176,9 @@ function updateStats(){
     ENEMY_STATS.health.innerHTML = "Health: "+currentEnemy.health;
     ENEMY_STATS.points.innerHTML = "Points: "+currentEnemy.points;
 }
+// Handle Attack types
 function attack(type){
+    // A switch cased is used rather than multiple if statements
     switch(type){
         case "weak":
             player.weakAttack(currentEnemy);
@@ -160,10 +192,15 @@ function attack(type){
         default:
             break;
     }
+    // Update the log
     LOG.innerHTML = player.logging()+"<br>"+LOG.innerHTML;
+    // Attack the player
     currentEnemy.attackCharacter(player);
+    // Update the log
     LOG.innerHTML = currentEnemy.logging()+"<br>"+LOG.innerHTML;
+    // Update the stats
     updateStats();
+    // If player lost
     if(player.health <= 0){
         console.log("Game Over");
         ACTIONS.div.style.display = "none";
@@ -173,6 +210,7 @@ function attack(type){
         return;
     }
 }
+// Handle heal types
 function heal(type){
     switch(type){
         case "weak":
@@ -187,11 +225,16 @@ function heal(type){
         default:
             break;
     }
+    // Update the log
     LOG.innerHTML = player.logging()+"<br>"+LOG.innerHTML;
+    // Update the stats
     updateStats();
+    // Attack the player
     currentEnemy.attackCharacter(player);
+    // Update the log
     LOG.innerHTML = currentEnemy.logging()+"<br>"+LOG.innerHTML;
 }
+// Clear the log
 function clearLog(){
     LOG.innerHTML = "";
 }
