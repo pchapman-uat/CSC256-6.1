@@ -72,7 +72,7 @@ var ENEMY_STATS;
 var CLEAR_BTN;
 
 // If this is true it will bypass the registry
-const debug = true;
+const debug = false;
 // Main function
 function main(){
     console.log('Hello World');
