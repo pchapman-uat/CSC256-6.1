@@ -140,7 +140,7 @@ function updateStats(){
     PLAYER_STATS.score.innerHTML = "Score: "+player.score;
     PLAYER_STATS.health.innerHTML = "Health: "+player.health;
     if(player.item == null) PLAYER_STATS.item.innerHTML = "Item: None";
-    else PLAYER_STATS.item.innerHTML = "Item: "+player.item.name;
+    else PLAYER_STATS.item.innerHTML = "Item: "+player.item.name+ ` (${player.item.damage})`;
 
     ENEMY_STATS.displayName.innerHTML = currentEnemy.name;
     ENEMY_STATS.health.innerHTML = "Health: "+currentEnemy.health;

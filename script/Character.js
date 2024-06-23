@@ -45,7 +45,7 @@ class Player extends Character {
         this.attackCharacter(enemy, this.baseAttack);
     }
     attackCharacter(character, damage){
-        this.calculateDamage(damage);
+        damage = this.calculateDamage(damage);
         super.attackCharacter(character, damage);
         if(!(character instanceof Enemy)) return;
         if(character.health <= 0){
