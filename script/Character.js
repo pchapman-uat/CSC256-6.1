@@ -7,19 +7,20 @@ class Character {
     }
 
     takeDamage(damage){
-        this.recentLog = " took " + damage + " damage"
+        this.recentLog = this.name + " took " + damage + " damage"
         console.log(this.recentLog);
         this.health -= damage;
     }
 
     attackCharacter(character, damage){
-        this.recentLog = " attacked " + character.name + " for " + damage + " damage"
+        if(this.health <= 0) return;
+        this.recentLog = this.name + " attacked " + character.name + " for " + damage + " damage"
         console.log(this.recentLog);
         character.takeDamage(damage);
     }
 
     logging(){
-        return `${this.name} ${this.recentLog}`
+        return `${this.recentLog}`
     }
 }
 class Player extends Character {
@@ -37,15 +38,49 @@ class Player extends Character {
     normalAttack(enemy){
         this.attackCharacter(enemy, this.baseAttack);
     }
+    attackCharacter(character, damage){
+        super.attackCharacter(character, damage);
+        if(!(character instanceof Enemy)) return;
+        if(character.health <= 0){
+            this.score += character.points;
+            this.recentLog = this.name+ " defeated " + character.name + " and gained " + character.points + " points"
+            console.log(this.recentLog);
+        }
+    }
 }
 
 class Enemy extends Character {
-    constructor(name, health, points=health){
+    randomNames = [
+        "Goblin",
+        "Orc",
+        "Skeleton",
+        "Bandit",
+        "Slime",
+        "Troll",
+        "Zombie",
+        "Vampire Bat",
+        "Dark Mage",
+        "Lizardman"
+    ]
+    constructor(name=this.getRandomName(), health, points=health){
         super(name, health);
         this.points = points;
     }
     attackCharacter(character, damage=this.baseAttack){ 
         super.attackCharacter(character, damage+Math.floor(Math.random() * 10));
+        if(this.health <= 0){
+            this.reset();
+            this.recentLog = "A new " + this.name + " has appeared!"
+        }
+    }
+    reset(health=100, points=health, name){
+        if(name == undefined) name = this.getRandomName();
+        this.health = health;
+        this.name = name;
+        this.points = points;
+    }
+    getRandomName(){
+        return this.randomNames[Math.floor(Math.random() * this.randomNames.length)];
     }
 }
 export {Player, Enemy};
