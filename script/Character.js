@@ -40,8 +40,12 @@ class Player extends Character {
 }
 
 class Enemy extends Character {
-    constructor(name, health){
+    constructor(name, health, points=health){
         super(name, health);
+        this.points = points;
+    }
+    attackCharacter(character, damage=this.baseAttack){ 
+        super.attackCharacter(character, damage+Math.floor(Math.random() * 10));
     }
 }
 export {Player, Enemy};
