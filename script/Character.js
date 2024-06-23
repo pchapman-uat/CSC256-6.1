@@ -7,9 +7,14 @@ class Character {
     }
 
     takeDamage(damage){
+        this.health -= damage;
+        if(this.health <= 0) {
+            this.health = 0;
+            return;
+        };
         this.recentLog = this.name + " took " + damage + " damage"
         console.log(this.recentLog);
-        this.health -= damage;
+        
     }
 
     attackCharacter(character, damage){
