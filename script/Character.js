@@ -1,6 +1,5 @@
 // Base Character Class
 class Character {
-    // TODO: Add JSDoc
     // Store the recent logging message
     recentLog = null;
     // Constructor for character
@@ -42,10 +41,11 @@ class Character {
         return `${this.recentLog}`
     }
 }
-
 // The class of the player extends the base character class
 class Player extends Character {
-    // TODO: Add JSDoc
+    /**
+     * @type {Item}
+     */
     item;
     // Constructer for the player
     constructor(username, name){
@@ -57,17 +57,32 @@ class Player extends Character {
         this.score = 0;
     }
     // Haddle Attacking Enemy, multuple functions are used that adjust the base attack ammount
-    // TODO: Add JSDoc
+    /**
+     *  Use Strong Attack (2x multiplier)
+     * @param {Character} enemy 
+     */
     strongAttack(enemy){
         this.attackCharacter(enemy, this.baseAttack * 2);
     }
+    /**
+     * Use Weak Attack (0.5x multiplier)
+     * @param {Character} enemy 
+     */
     weakAttack(enemy){
         this.attackCharacter(enemy, this.baseAttack * 0.5);
     }
+    /**
+     * Use Normal Attack (1x multiplier)
+     * @param {Character} enemy 
+    */
     normalAttack(enemy){
         this.attackCharacter(enemy, this.baseAttack);
     }
-    // General attacking function
+    /**
+     *  General attacking function
+     * @param {Character} character 
+     * @param {Number} damage 
+     */
     attackCharacter(character, damage){
         // Calculat the damage based on the item
         damage = this.calculateDamage(damage);
@@ -147,14 +162,19 @@ class Enemy extends Character {
         this.points = points;
     }
     // Attack a character
-    // TODO: Add JSDoc
-    attackCharacter(character, damage=this.baseAttack){ 
-        // Call the base method using a random ammount
-        super.attackCharacter(character, damage+Math.floor(Math.random() * 10));
-        // If the enemy died spawn a new one
-        if(this.health <= 0){
+    /**
+     * Attack another character.
+     * @param {Character} character - The character to attack.
+     * @param {number} [damage=this.baseAttack] - The damage to inflict, defaults to base attack damage plus a random amount.
+     */
+    attackCharacter(character, damage=this.baseAttack) {
+        // Call the base method using a random amount
+        super.attackCharacter(character, damage + Math.floor(Math.random() * 10));
+
+        // If the enemy died, spawn a new one
+        if (this.health <= 0) {
             this.reset();
-            this.recentLog = "A new " + this.name + " has appeared!"
+            this.recentLog = "A new " + this.name + " has appeared!";
         }
     }
     // Reset the enemy
