@@ -8,6 +8,7 @@ These entries will be captured by your JavaScript form.
 Create a "submit" button that once clicked, will output the 4 items to a separate text field/output area on the same page.
 
 ## Demo
+You can also view the website here https://pchapman-uat.github.io/CSC256-6.1/
 ![](./demo/image1.webp)
 ![](./demo/image2.webp)
 ![](./demo/image3.webp)
