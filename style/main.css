@@ -50,3 +50,25 @@ header {
     padding: 1%;
     overflow-y: auto;
 }
+
+.player, .enemy {
+    background-color: rgba(255, 255, 255, 0.25);
+    padding: 2%;
+    border-radius: 100px;
+}
+.player {
+    background-color: rgba(0, 0, 255, 0.25);
+}
+.enemy {
+    background-color: rgba(255, 0, 0, 0.25);
+}
+
+
+/* LOG */
+
+.log_Enemy{
+    color: red;
+}
+.log_Player{
+    color: blue;
+}

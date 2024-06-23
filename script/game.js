@@ -191,14 +191,8 @@ function attack(type){
         default:
             break;
     }
-    // Update the log
-    LOG.innerHTML = player.logging()+"<br>"+LOG.innerHTML;
-    // Attack the player
-    currentEnemy.attackCharacter(player);
-    // Update the log
-    LOG.innerHTML = currentEnemy.logging()+"<br>"+LOG.innerHTML;
-    // Update the stats
-    updateStats();
+    // Update the log and stats
+    endTurn();
     // If player lost
     if(player.health <= 0){
         console.log("Game Over");
@@ -208,6 +202,23 @@ function attack(type){
         document.getElementById("gameOver_Score").innerHTML = "Score: "+player.score;
         return;
     }
+}
+function endTurn(){
+    let span = document.createElement("span");
+    span.innerHTML = player.logging()+"<br>";
+    span.classList.add("log_Player");
+    let old = LOG.innerHTML
+    LOG.innerHTML = ""
+    LOG.appendChild(span);
+    // Attack the player
+    currentEnemy.attackCharacter(player);
+    // Update the log
+    span = document.createElement("span");
+    span.innerHTML = currentEnemy.logging()+"<br>";
+    span.classList.add("log_Enemy");
+    LOG.appendChild(span);
+    LOG.innerHTML += old;
+    updateStats();
 }
 // Handle heal types
 function heal(type){
@@ -224,14 +235,8 @@ function heal(type){
         default:
             break;
     }
-    // Update the log
-    LOG.innerHTML = player.logging()+"<br>"+LOG.innerHTML;
-    // Update the stats
-    updateStats();
-    // Attack the player
-    currentEnemy.attackCharacter(player);
-    // Update the log
-    LOG.innerHTML = currentEnemy.logging()+"<br>"+LOG.innerHTML;
+    // Update the log and stats
+    endTurn();
 }
 // Clear the log
 function clearLog(){
