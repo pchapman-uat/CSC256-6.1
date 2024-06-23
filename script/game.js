@@ -46,7 +46,17 @@ var LOG;
  */
 var ACTIONS;
 
+/**
+ * @typedef {Object} EnemyStats
+ * @property {HTMLElement} displayName - The enemy's display name element.
+ * @property {HTMLElement} points - The enemy's points element.
+ * @property {HTMLElement} health - The enemy's health element.
+ */
 
+/**
+ * @type {EnemyStats}
+ */
+var ENEMY_STATS;
 const debug = true;
 function main(){
     console.log('Hello World');
@@ -87,23 +97,31 @@ function startGame(){
         },
     };
 
-    ACTIONS.div.style.visibility = "visible";
-    PLAYER_STATS.div.style.visibility = "visible";
+    ENEMY_STATS = {
+        displayName: document.getElementById("enemy_DisplayName"),
+        points: document.getElementById("enemy_Points"),
+        health: document.getElementById("enemy_Health"),
+    };
 
-    PLAYER_STATS.displayName.innerHTML = player.name;
-    PLAYER_STATS.score.innerHTML = "Score: "+player.score;
-    PLAYER_STATS.health.innerHTML = "Health: "+player.health;
+    ACTIONS.div.style.display = "block";
+    PLAYER_STATS.div.style.display = "block";
+    currentEnemy = new Enemy("Enemy", 100);
+    updateStats();
 
     ACTIONS.attack.weak.addEventListener("click", () => attack("weak"));
     ACTIONS.attack.normal.addEventListener("click", () => attack("normal"));
     ACTIONS.attack.strong.addEventListener("click", () => attack("strong"));
 
-    currentEnemy = new Enemy("Enemy", 100);
-    player.strongAttack(currentEnemy);
-    LOG.innerHTML += player.logging()+"<br>";
-
 }
+function updateStats(){
+    PLAYER_STATS.displayName.innerHTML = player.name;
+    PLAYER_STATS.score.innerHTML = "Score: "+player.score;
+    PLAYER_STATS.health.innerHTML = "Health: "+player.health;
 
+    ENEMY_STATS.displayName.innerHTML = currentEnemy.name;
+    ENEMY_STATS.health.innerHTML = "Health: "+currentEnemy.health;
+    ENEMY_STATS.points.innerHTML = "Points: "+currentEnemy.points;
+}
 function attack(type){
     switch(type){
         case "weak":
@@ -119,4 +137,7 @@ function attack(type){
             break;
     }
     LOG.innerHTML += player.logging()+"<br>";
+    currentEnemy.attackCharacter(player);
+    LOG.innerHTML += currentEnemy.logging()+"<br>";
+    updateStats();
 }
