@@ -155,10 +155,12 @@ class Enemy extends Character {
         "Lizardman"
     ]
     // A default is used to allow for a random name, the points is set to the health if none is provided
-    constructor(name=this.getRandomName(), health, points=health){
+    constructor(name, health, points=health){
         // Call the orginal constructor
+        
         super(name, health);
         // Set the points
+        if(!name) this.name = this.getRandomName();
         this.points = points;
     }
     // Attack a character

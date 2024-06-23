@@ -148,7 +148,7 @@ function startGame(){
     ACTIONS.div.style.display = "block";
     PLAYER_STATS.div.style.display = "block";
     // Create a new enemy
-    currentEnemy = new Enemy(null, 100);
+    currentEnemy = new Enemy(undefined, 100);
     // Update the current stats
     updateStats();
 
