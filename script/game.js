@@ -17,6 +17,7 @@ var currentEnemy;
  * @property {HTMLElement} displayName - The player's display name element.
  * @property {HTMLElement} score - The player's score element.
  * @property {HTMLElement} health - The player's health element.
+ * @property {HTMLElement} item - The player's item element
  */
 
 /**
@@ -61,7 +62,7 @@ var ENEMY_STATS;
  * @type {HTMLElement}
  */
 var CLEAR_BTN;
-const debug = false;
+const debug = true;
 function main(){
     console.log('Hello World');
     const REGISTER_FORM = document.getElementById("accountForm")
@@ -88,6 +89,7 @@ function startGame(){
         displayName: document.getElementById("game_DisplayName"),
         score: document.getElementById("game_Score"),
         health: document.getElementById("game_Health"),
+        item: document.getElementById("game_Item"),
     };
 
     LOG = document.getElementById("game_Log");
@@ -124,6 +126,8 @@ function updateStats(){
     PLAYER_STATS.displayName.innerHTML = player.name;
     PLAYER_STATS.score.innerHTML = "Score: "+player.score;
     PLAYER_STATS.health.innerHTML = "Health: "+player.health;
+    if(player.item == null) PLAYER_STATS.item.innerHTML = "Item: None";
+    else PLAYER_STATS.item.innerHTML = "Item: "+player.item.name;
 
     ENEMY_STATS.displayName.innerHTML = currentEnemy.name;
     ENEMY_STATS.health.innerHTML = "Health: "+currentEnemy.health;

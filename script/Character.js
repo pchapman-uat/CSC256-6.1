@@ -29,6 +29,7 @@ class Character {
     }
 }
 class Player extends Character {
+    item;
     constructor(username, name){
         super(name, 100);
         this.username = username;
@@ -44,13 +45,25 @@ class Player extends Character {
         this.attackCharacter(enemy, this.baseAttack);
     }
     attackCharacter(character, damage){
+        this.calculateDamage(damage);
         super.attackCharacter(character, damage);
         if(!(character instanceof Enemy)) return;
         if(character.health <= 0){
             this.score += character.points;
-            this.recentLog = this.name+ " defeated " + character.name + " and gained " + character.points + " points"
+            this.randomItem();
+            this.recentLog = this.name+ " defeated " + character.name + " and gained " + character.points + " points<br>"+this.name+" got " +this.item.name +"!"
             console.log(this.recentLog);
         }
+    }
+    calculateDamage(damage){
+        if(this.item) damage += this.item.damage;
+        return damage;
+    }
+    randomItem(){
+        this.addItem(randomItems[Math.floor(Math.random() * randomItems.length)]);
+    }
+    addItem(item){
+        this.item = item;
     }
 }
 
@@ -87,4 +100,20 @@ class Enemy extends Character {
         return this.randomNames[Math.floor(Math.random() * this.randomNames.length)];
     }
 }
+
+class Item {
+
+    constructor(name, damage){
+        this.name = name;
+        this.damage = damage;
+    }
+    
+}
+
+const randomItems = [
+    new Item("Sword", 10),
+    new Item("Axe", 15),
+    new Item("Spear", 20),
+    new Item("Dagger", 5),
+]
 export {Player, Enemy};
