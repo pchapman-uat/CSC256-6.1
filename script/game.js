@@ -148,8 +148,7 @@ function startGame(){
     ACTIONS.div.style.display = "block";
     PLAYER_STATS.div.style.display = "block";
     // Create a new enemy
-    // TODO: Change to null to allow random name
-    currentEnemy = new Enemy("Enemy", 100);
+    currentEnemy = new Enemy(null, 100);
     // Update the current stats
     updateStats();
 
