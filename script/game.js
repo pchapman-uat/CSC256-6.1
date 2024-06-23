@@ -57,6 +57,10 @@ var ACTIONS;
  * @type {EnemyStats}
  */
 var ENEMY_STATS;
+/**
+ * @type {HTMLElement}
+ */
+var CLEAR_BTN;
 const debug = true;
 function main(){
     console.log('Hello World');
@@ -103,6 +107,9 @@ function startGame(){
         health: document.getElementById("enemy_Health"),
     };
 
+    CLEAR_BTN = document.getElementById("clearLog");
+    CLEAR_BTN.addEventListener("click", clearLog);
+
     ACTIONS.div.style.display = "block";
     PLAYER_STATS.div.style.display = "block";
     currentEnemy = new Enemy("Enemy", 100);
@@ -140,4 +147,8 @@ function attack(type){
     currentEnemy.attackCharacter(player);
     LOG.innerHTML += currentEnemy.logging()+"<br>";
     updateStats();
+}
+
+function clearLog(){
+    LOG.innerHTML = "";
 }
