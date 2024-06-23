@@ -36,12 +36,19 @@
         </div>
     </section>
     <section id="gameScreen" class="gameScreen gameSection" style="visibility: hidden;">
-        <div>
-            <h3>You:</h3>
-            <p id="game_DisplayName"></p>
-            <p id="game_Score"></p>
-            <p id="game_Health"></p>
-            <ul id="game_items"></ul>
+        <div style="display: flex; flex-direction: row; justify-content: space-around;">
+            <div>
+                <h3>You:</h3>
+                <p id="game_DisplayName"></p>
+                <p id="game_Score"></p>
+                <p id="game_Health"></p>
+            </div>
+            <div>
+                <h3>Enemy:</h3>
+                <p id="game_EnemyDisplayName">Enemy Name</p>
+                <p id="game_EnemyPoints">Enemy Points</p>
+                <p id="game_EnemyHealth">Enemy Health</p>
+            </div>
         </div>
         <div>
             <p id="game_Log"></p>
