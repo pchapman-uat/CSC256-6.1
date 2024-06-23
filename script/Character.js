@@ -78,8 +78,7 @@ class Enemy extends Character {
             this.recentLog = "A new " + this.name + " has appeared!"
         }
     }
-    reset(health=100, points=health, name){
-        if(name == undefined) name = this.getRandomName();
+    reset(health=100, points=health, name=this.getRandomName()){
         this.health = health;
         this.name = name;
         this.points = points;

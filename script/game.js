@@ -61,7 +61,7 @@ var ENEMY_STATS;
  * @type {HTMLElement}
  */
 var CLEAR_BTN;
-const debug = true;
+const debug = false;
 function main(){
     console.log('Hello World');
     const REGISTER_FORM = document.getElementById("accountForm")
@@ -147,6 +147,14 @@ function attack(type){
     currentEnemy.attackCharacter(player);
     LOG.innerHTML = currentEnemy.logging()+"<br>"+LOG.innerHTML;
     updateStats();
+    if(player.health <= 0){
+        console.log("Game Over");
+        ACTIONS.div.style.display = "none";
+        PLAYER_STATS.div.style.display = "none";
+        document.getElementById("gameOver").style.display = "flex";
+        document.getElementById("gameOver_Score").innerHTML = "Score: "+player.score;
+        return;
+    }
 }
 
 function clearLog(){
