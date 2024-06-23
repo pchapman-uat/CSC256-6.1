@@ -48,4 +48,5 @@ header {
     background-color: white;
     height: 250px;
     padding: 1%;
+    overflow-y: auto;
 }
