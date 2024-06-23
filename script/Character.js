@@ -31,6 +31,12 @@ class Player extends Character {
     strongAttack(enemy){
         this.attackCharacter(enemy, this.baseAttack * 2);
     }
+    weakAttack(enemy){
+        this.attackCharacter(enemy, this.baseAttack * 0.5);
+    }
+    normalAttack(enemy){
+        this.attackCharacter(enemy, this.baseAttack);
+    }
 }
 
 class Enemy extends Character {
