@@ -27,6 +27,10 @@ var currentEnemy;
  * @property {HTMLElement} attack.weak - The weak attack button element.
  * @property {HTMLElement} attack.normal - The normal attack button element.
  * @property {HTMLElement} attack.strong - The strong attack button element.
+ * @property {Object} heal - The heal actions.
+ * @property {HTMLElement} heal.weak - The weak heal button element.
+ * @property {HTMLElement} heal.normal - The normal heal button element.
+ * @property {HTMLElement} heal.strong - The strong heal button element.
  */
 
 /**
@@ -101,6 +105,11 @@ function startGame(){
             normal: document.getElementById("normalAttack"),
             strong: document.getElementById("strongAttack"),
         },
+        heal: {
+            weak: document.getElementById("weakHeal"),
+            normal: document.getElementById("normalHeal"),
+            strong: document.getElementById("strongHeal"),
+        },
     };
 
     ENEMY_STATS = {
@@ -120,6 +129,10 @@ function startGame(){
     ACTIONS.attack.weak.addEventListener("click", () => attack("weak"));
     ACTIONS.attack.normal.addEventListener("click", () => attack("normal"));
     ACTIONS.attack.strong.addEventListener("click", () => attack("strong"));
+
+    ACTIONS.heal.weak.addEventListener("click", () => heal("weak"));
+    ACTIONS.heal.normal.addEventListener("click", () => heal("normal"));
+    ACTIONS.heal.strong.addEventListener("click", () => heal("strong"));
 
 }
 function updateStats(){
@@ -160,7 +173,25 @@ function attack(type){
         return;
     }
 }
-
+function heal(type){
+    switch(type){
+        case "weak":
+            player.weakHeal();
+            break;
+        case "normal":
+            player.normalHeal();
+            break;
+        case "strong":
+            player.strongHeal();
+            break;
+        default:
+            break;
+    }
+    LOG.innerHTML = player.logging()+"<br>"+LOG.innerHTML;
+    updateStats();
+    currentEnemy.attackCharacter(player);
+    LOG.innerHTML = currentEnemy.logging()+"<br>"+LOG.innerHTML;
+}
 function clearLog(){
     LOG.innerHTML = "";
 }

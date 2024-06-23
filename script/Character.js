@@ -65,6 +65,22 @@ class Player extends Character {
     addItem(item){
         this.item = item;
     }
+
+    weakHeal(){
+        this.heal(10);
+    }
+    normalHeal(){
+        this.heal(25);
+    }
+    strongHeal(){
+        this.heal(50)
+    }
+
+    heal(ammount){
+        this.health += ammount;
+        if(this.health > 100) this.health = 100;
+        this.recentLog = this.name + " healed for " + ammount + " health"
+    }
 }
 
 class Enemy extends Character {
